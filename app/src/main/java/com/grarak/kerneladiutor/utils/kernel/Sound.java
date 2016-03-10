@@ -156,12 +156,18 @@ public class Sound implements Constants {
         return Utils.existFile(HANDSET_MICROPONE_GAIN);
     }
 
-    public static void setHeadphoneGain(String value, Context context) {
-        Control.runCommand(value + " " + value, HEADPHONE_GAIN, Control.CommandType.FAUX_GENERIC, context);
+    public static void setHeadphoneGainleft(String value, Context context) {
+        Control.runCommand(value + " " + value, HEADPHONE_GAIN_L, Control.CommandType.FAUX_GENERIC, context);
+    }
+    public static void setHeadphoneGainright(String value, Context context) {
+        Control.runCommand(value + " " + value, HEADPHONE_GAIN_R, Control.CommandType.FAUX_GENERIC, context);
     }
 
-    public static String getCurHeadphoneGain() {
-        return Utils.readFile(HEADPHONE_GAIN).split(" ")[0];
+    public static String getCurHeadphoneGainleft() {
+        return Utils.readFile(HEADPHONE_GAIN_L).split(" ")[0];
+    }
+    public static String getCurHeadphoneGainright() {
+        return Utils.readFile(HEADPHONE_GAIN_R).split(" ")[0];
     }
 
     public static List<String> getHeadphoneGainLimits() {
@@ -171,9 +177,16 @@ public class Sound implements Constants {
         return list;
     }
 
-    public static boolean hasHeadphoneGain() {
-        return Utils.existFile(HEADPHONE_GAIN);
+
+    public static boolean hasHeadphoneGainleft() {
+        return Utils.existFile(HEADPHONE_GAIN_L);
     }
+    public static boolean hasHeadphoneGainright() {
+        return Utils.existFile(HEADPHONE_GAIN_R);
+    }
+
+
+
 
     public static void activateHighPerfMode(boolean active, Context context) {
         Control.runCommand(active ? "1" : "0", HIGHPERF_MODE_ENABLE, Control.CommandType.GENERIC, context);

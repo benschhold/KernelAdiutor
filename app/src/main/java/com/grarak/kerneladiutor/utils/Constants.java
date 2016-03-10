@@ -590,7 +590,8 @@ public interface Constants {
     // Sound
     String SOUND_CONTROL_ENABLE = "/sys/kernel/sound_control_3/gpl_sound_control_locked";
     String HIGHPERF_MODE_ENABLE = "/sys/module/snd_soc_wcd9330/parameters/high_perf_mode";
-    String HEADPHONE_GAIN = "/sys/kernel/sound_control_3/gpl_headphone_l_gain";
+    String HEADPHONE_GAIN_L = "/sys/kernel/sound_control_3/gpl_headphone_l_gain";
+    String HEADPHONE_GAIN_R = "/sys/kernel/sound_control_3/gpl_headphone_r_gain";
 
     String HANDSET_MICROPONE_GAIN = "/sys/kernel/sound_control_3/gpl_mic_gain";
     String CAM_MICROPHONE_GAIN = "/sys/kernel/sound_control_3/gpl_cam_mic_gain";
@@ -603,7 +604,7 @@ public interface Constants {
 
     String[] SPEAKER_GAIN_ARRAY = {SPEAKER_GAIN, SPEAKER_BOOST};
 
-    String[][] SOUND_ARRAY = {SPEAKER_GAIN_ARRAY, {SOUND_CONTROL_ENABLE, HIGHPERF_MODE_ENABLE, HEADPHONE_GAIN, HANDSET_MICROPONE_GAIN,
+    String[][] SOUND_ARRAY = {SPEAKER_GAIN_ARRAY, {SOUND_CONTROL_ENABLE, HIGHPERF_MODE_ENABLE, HEADPHONE_GAIN_L, HEADPHONE_GAIN_R, HANDSET_MICROPONE_GAIN,
             CAM_MICROPHONE_GAIN, HEADPHONE_POWERAMP_GAIN, MIC_BOOST, VOLUME_BOOST}};
 
     // Battery
