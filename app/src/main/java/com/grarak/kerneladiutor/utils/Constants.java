@@ -41,6 +41,7 @@ public interface Constants {
     String PROC_MEMINFO = "/proc/meminfo";
 
     // CPU
+    String BCH = "/sys/kernel/boeffla_config_mode/enabled";
     String CPU_CUR_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_cur_freq";
     String CPU_TEMP_ZONE0 = "/sys/class/thermal/thermal_zone0/temp";
     String CPU_TEMP_ZONE1 = "/sys/class/thermal/thermal_zone1/temp";
@@ -519,7 +520,7 @@ public interface Constants {
 
     // S2W
     String S2W_ONLY = "/sys/android_touch/s2w_s2sonly";
-    String SW2 = "/sys/android_touch/sweep2wake";
+    String SW2 = "/proc/touchpanel/sweep_wake_enable";
     String SW2_2 = "/sys/android_touch2/sweep2wake";
 
     String[] S2W_ARRY = {S2W_ONLY, SW2, SW2_2};
@@ -551,13 +552,20 @@ public interface Constants {
     String[] DT2S_ARRAY = {DT2S};
 
     // Gesture
-    String GESTURE_CRTL = "/sys/devices/virtual/touchscreen/touchscreen_dev/gesture_ctrl";
+    String GESTURE_CRTL = "/proc/touchpanel/gesture_enable/sdf";
 
     Integer[] GESTURE_HEX_VALUES = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
     String[] GESTURE_STRING_VALUES = {"up", "down", "left", "right", "e", "o", "w", "c", "m", "double_click"};
 
+    //TorchWake
+    String TW = "/proc/touchpanel/flashlight_enable";
+
+    //Musicwake
+    String MW = "/proc/touchpanel/music_enable";
+    
+	
     // Camera Gesture
-    String CAMERA_GESTURE = "/sys/android_touch/camera_gesture";
+    String CAMERA_GESTURE = "/proc/touchpanel/camera_enable";
 
     // Pocket mode for Gesture
     String POCKET_MODE = "/sys/android_touch/pocket_mode";
@@ -580,9 +588,10 @@ public interface Constants {
             POCKET_MODE_ARRAY, {LENIENT, GESTURE_CRTL, CAMERA_GESTURE, POWER_KEY_SUSPEND}};
 
     // Sound
-    String SOUND_CONTROL_ENABLE = "/sys/module/snd_soc_wcd9320/parameters/enable_fs";
-    String HIGHPERF_MODE_ENABLE = "/sys/devices/virtual/misc/soundcontrol/highperf_enabled";
-    String HEADPHONE_GAIN = "/sys/kernel/sound_control_3/gpl_headphone_gain";
+    String SOUND_CONTROL_ENABLE = "/sys/kernel/sound_control_3/gpl_sound_control_locked";
+    String HIGHPERF_MODE_ENABLE = "/sys/module/snd_soc_wcd9330/parameters/high_perf_mode";
+    String HEADPHONE_GAIN = "/sys/kernel/sound_control_3/gpl_headphone_l_gain";
+
     String HANDSET_MICROPONE_GAIN = "/sys/kernel/sound_control_3/gpl_mic_gain";
     String CAM_MICROPHONE_GAIN = "/sys/kernel/sound_control_3/gpl_cam_mic_gain";
     String SPEAKER_GAIN = "/sys/kernel/sound_control_3/gpl_speaker_gain";
@@ -601,9 +610,11 @@ public interface Constants {
     String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
     String BLX = "/sys/devices/virtual/misc/batterylifeextender/charging_limit";
 
-    String CHARGE_RATE = "sys/kernel/thundercharge_control";
+    String CHARGE_RATE = "sys/kernel/charge_levels/charge_info";
     String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
     String CUSTOM_CHARGING_RATE = CHARGE_RATE + "/custom_current";
+    String CHARGE_AC = "sys/kernel/charge_levels/charge_level_ac";
+    String CHARGE_USB = "sys/kernel/charge_levels/charge_level_usb";
 
     String[] BATTERY_ARRAY = {FORCE_FAST_CHARGE, BLX, CHARGE_RATE};
 
@@ -750,6 +761,9 @@ public interface Constants {
                     MSM_HSIC_WAKELOCK_DIVIDER, LOGGER_ENABLED, DYNAMIC_FSYNC, GENTLE_FAIR_SLEEPERS, POWER_SUSPEND_MODE,
                     POWER_SUSPEND_STATE, TCP_AVAILABLE_CONGESTIONS, HOSTNAME_KEY},
             SMB135X_WAKELOCKS, WLAN_RX_WAKELOCKS, WLAN_CTRL_WAKELOCKS, WLAN_WAKELOCKS, CRC_ARRAY, FSYNC_ARRAY};
+
+    // Switch Buttons
+    String SWITCH_BUTTON = "/proc/s1302/key_rep";
 
     // Build prop
     String BUILD_PROP = "/system/build.prop";

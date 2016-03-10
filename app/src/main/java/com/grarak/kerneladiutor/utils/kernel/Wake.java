@@ -39,6 +39,9 @@ public class Wake implements Constants {
     private static String DT2S_FILE;
     private static String WAKE_TIMEOUT_FILE;
     private static String POCKET_MODE_FILE;
+    private static String TW_FILE;
+    private static String MW_FILE;
+
 
     public static void activatePowerKeySuspend(boolean active, Context context) {
         Control.runCommand(active ? "1" : "0", POWER_KEY_SUSPEND, Control.CommandType.GENERIC, context);
@@ -101,6 +104,32 @@ public class Wake implements Constants {
 
     public static boolean hasCameraGesture() {
         return Utils.existFile(CAMERA_GESTURE);
+    }
+
+
+
+public static void activateTW(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", TW, Control.CommandType.GENERIC, context);
+    }
+
+    public static boolean isTWActive() {
+        return Utils.readFile(TW).equals("1");
+    }
+
+    public static boolean hasTW() {
+        return Utils.existFile(TW);
+    }
+
+public static void activateMW(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", MW, Control.CommandType.GENERIC, context);
+    }
+
+    public static boolean isMWActive() {
+        return Utils.readFile(TW).equals("1");
+    }
+
+    public static boolean hasMW() {
+        return Utils.existFile(MW);
     }
 
     public static void activateGesture(boolean active, int gesture, Context context) {
