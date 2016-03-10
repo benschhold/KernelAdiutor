@@ -151,6 +151,8 @@
     <string name="override_vmin_summary">Disable to remove manufacturer limits on undervolting</string>
 
     <!-- CPU Hotplug -->
+    <string name="bch">Boeffla Config Helper</string>
+    <string name="bch_summary">Lord Boefflas solution for keeping big cores alive</string>	
     <string name="mpdecision">MPDecision</string>
     <string name="mpdecision_summary">Qualcomm\'s hotplugging solution. You might get problems with changing frequencies when this is enabled.</string>
     <string name="intelliplug">IntelliPlug</string>

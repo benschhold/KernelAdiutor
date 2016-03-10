@@ -262,7 +262,17 @@ public class CPUHotplug implements Constants {
     public static void activateThunderPlug(boolean active, Context context) {
         Control.runCommand(active ? "1" : "0", HOTPLUG_THUNDER_PLUG_ENABLE, Control.CommandType.GENERIC, context);
     }
+    
+    public static void activatebch(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", BCH, Control.CommandType.GENERIC, context);
+    }
 
+    public static boolean isbchActive() {
+        return Utils.readFile(BCH).equals("1");
+    }
+    public static boolean hasbch() {
+        return Utils.existFile(BCH);
+    }
     public static boolean isThunderPlugActive() {
         return Utils.readFile(HOTPLUG_THUNDER_PLUG_ENABLE).equals("1");
     }

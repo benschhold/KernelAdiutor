@@ -40,7 +40,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
         PopupCardView.DPopupCard.OnDPopupCardListener, SeekBarCardView.DSeekBarCard.OnDSeekBarCardListener {
 
     private SwitchCardView.DSwitchCard mMpdecisionCard;
-
+    private SwitchCardView.DSwitchCard mbchCard;
     private SwitchCardView.DSwitchCard mIntelliPlugCard;
     private PopupCardView.DPopupCard mIntelliPlugProfileCard;
     private SwitchCardView.DSwitchCard mIntelliPlugEcoCard;
@@ -159,6 +159,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
         if (CPUHotplug.hasThunderPlug()) thunderPlugInit();
         if (CPUHotplug.hasZenDecision()) zenDecisionInit();
         if (CPUHotplug.hasAutoSmp()) autoSmpInit();
+        if (CPUHotplug.hasbch()) bchInit();
     }
 
     private void mpdecisionInit() {
@@ -541,7 +542,16 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
         }
 
     }
+    private void bchInit() {
+        if (CPUHotplug.hasbch()) {
+            mbchCard = new SwitchCardView.DSwitchCard();
+             mbchCard.setTitle(getString(R.string.bch));
+             mbchCard.setDescription(getString(R.string.bch_summary));
+             mbchCard.setChecked(CPUHotplug.isbchActive());
+             mbchCard.setOnDSwitchCardListener(this);
 
+            addView(mbchCard);
+        }}
     private void msmHotplugInit() {
         List<DAdapter.DView> views = new ArrayList<>();
 
@@ -1511,6 +1521,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
             CPUHotplug.activateIntelliPlug(checked, getActivity());
         else if (dSwitchCard == mIntelliPlugEcoCard)
             CPUHotplug.activateIntelliPlugEco(checked, getActivity());
+        else if (dSwitchCard == mbchCard)
+            CPUHotplug.activatebch(checked, getActivity());
         else if (dSwitchCard == mIntelliPlugTouchBoostCard)
             CPUHotplug.activateIntelliPlugTouchBoost(checked, getActivity());
         else if (dSwitchCard == mIntelliPlugDebugCard)
