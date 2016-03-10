@@ -764,7 +764,7 @@ public interface Constants {
             SMB135X_WAKELOCKS, WLAN_RX_WAKELOCKS, WLAN_CTRL_WAKELOCKS, WLAN_WAKELOCKS, CRC_ARRAY, FSYNC_ARRAY};
 
     // Switch Buttons
-    String SWITCH_BUTTON = "/proc/s1302/key_rep";
+    String SWITCH_BUTTONS = "/proc/s1302/key_rep";
 
     // Build prop
     String BUILD_PROP = "/system/build.prop";

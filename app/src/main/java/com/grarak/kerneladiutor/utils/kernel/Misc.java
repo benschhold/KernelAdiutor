@@ -253,13 +253,22 @@ public class Misc implements Constants {
     public static void activateDynamicFsync(boolean active, Context context) {
         Control.runCommand(active ? "1" : "0", DYNAMIC_FSYNC, Control.CommandType.GENERIC, context);
     }
+    public static void activateswitchbuttons(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", SWITCH_BUTTONS, Control.CommandType.GENERIC, context);
+    }
 
     public static boolean isDynamicFsyncActive() {
         return Utils.readFile(DYNAMIC_FSYNC).equals("1");
     }
+    public static boolean isswitchbuttonsActive() {
+        return Utils.readFile(SWITCH_BUTTONS).equals("1");
+    }
 
     public static boolean hasDynamicFsync() {
         return Utils.existFile(DYNAMIC_FSYNC);
+    }
+    public static boolean hasswitchbuttons() {
+        return Utils.existFile(SWITCH_BUTTONS);
     }
 
     public static void activateFsync(boolean active, Context context) {
@@ -268,6 +277,8 @@ public class Misc implements Constants {
         else
             Control.runCommand(active ? "Y" : "N", FSYNC_FILE, Control.CommandType.GENERIC, context);
     }
+
+
 
     public static boolean isFsyncActive() {
         if (FSYNC_USE_INTEGER)
@@ -290,6 +301,8 @@ public class Misc implements Constants {
             }
         return false;
     }
+
+  
 
     public static void activateCrc(boolean active, Context context) {
         Control.runCommand(active ? "1" : "0", CRC_FILE, Control.CommandType.GENERIC, context);

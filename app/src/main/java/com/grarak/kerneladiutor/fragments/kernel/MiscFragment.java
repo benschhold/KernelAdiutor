@@ -51,6 +51,7 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardView.
 
     private SwitchCardView.DSwitchCard mFsyncCard;
     private SwitchCardView.DSwitchCard mDynamicFsyncCard;
+    private SwitchCardView.DSwitchCard mswitchbuttonsCard;
 
     private SwitchCardView.DSwitchCard mGentleFairSleepersCard;
 
@@ -75,6 +76,7 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardView.
         super.init(savedInstanceState);
 
         if (Misc.hasVibration()) vibrationInit();
+        if (Misc.hasswitchbuttons()) switchbuttonsInit();
         if (Misc.hasLoggerEnable()) loggerInit();
         if (Misc.hasCrc()) crcInit();
         fsyncInit();
@@ -131,6 +133,7 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardView.
             addView(mFsyncCard);
         }
 
+
         if (Misc.hasDynamicFsync()) {
             mDynamicFsyncCard = new SwitchCardView.DSwitchCard();
             mDynamicFsyncCard.setTitle(getString(R.string.dynamic_fsync));
@@ -141,6 +144,17 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardView.
             addView(mDynamicFsyncCard);
         }
     }
+
+    private void switchbuttonsInit() {
+        if (Misc.hasswitchbuttons()) {
+            mswitchbuttonsCard = new SwitchCardView.DSwitchCard();
+            mswitchbuttonsCard.setTitle(getString(R.string.switchbuttons));
+            mswitchbuttonsCard.setDescription(getString(R.string.switchbuttons_summary));
+            mswitchbuttonsCard.setChecked(Misc.isswitchbuttonsActive());
+            mswitchbuttonsCard.setOnDSwitchCardListener(this);
+
+            addView(mswitchbuttonsCard);
+        }}
 
     private void gentlefairsleepersInit() {
         mGentleFairSleepersCard = new SwitchCardView.DSwitchCard();
@@ -366,6 +380,8 @@ public class MiscFragment extends RecyclerViewFragment implements PopupCardView.
             Misc.activateFsync(checked, getActivity());
         else if (dSwitchCard == mDynamicFsyncCard)
             Misc.activateDynamicFsync(checked, getActivity());
+        else if (dSwitchCard == mswitchbuttonsCard)
+            Misc.activateswitchbuttons(checked, getActivity());
         else if (dSwitchCard == mGentleFairSleepersCard)
             Misc.activateGentleFairSleepers(checked, getActivity());
         else if (dSwitchCard == mOldPowerSuspendStateCard)
