@@ -95,7 +95,7 @@ public interface Constants {
     String MAXBIG = "/sys/devices/system/cpu/cpu4/core_ctl/max_cpus";
     String MAXLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus";
 
-    String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE};
+   String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE};
 
   // CPU Voltage
     String CPU_VOLTAGE = "/sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table";
