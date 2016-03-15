@@ -88,7 +88,14 @@ public interface Constants {
             CPU_AVAILABLE_GOVERNORS, CPU_GOVERNOR_TUNABLES, CPU_GOVERNOR_TUNABLES_CORE, CPU_MC_POWER_SAVING, CPU_WQ_POWER_SAVING,
             CPU_AVAILABLE_CFS_SCHEDULERS, CPU_CURRENT_CFS_SCHEDULER, CPU_QUIET, CPU_BOOST, CPU_TOUCH_BOOST};
 
+  //Core Control
+    String MINBIG = "/sys/devices/system/cpu/cpu4/core_ctl/min_cpus";
+    String MINLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/min_cpus";
 
+    String MAXBIG = "/sys/devices/system/cpu/cpu4/core_ctl/max_cpus";
+    String MAXLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus";
+
+    String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE};
 
   // CPU Voltage
     String CPU_VOLTAGE = "/sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table";
