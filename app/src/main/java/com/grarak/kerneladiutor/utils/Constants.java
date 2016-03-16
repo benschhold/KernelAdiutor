@@ -89,13 +89,14 @@ public interface Constants {
             CPU_AVAILABLE_CFS_SCHEDULERS, CPU_CURRENT_CFS_SCHEDULER, CPU_QUIET, CPU_BOOST, CPU_TOUCH_BOOST};
 
   //Core Control
+    String BCH = "/sys/kernel/boeffla_config_mode/enabled";
     String MINBIG = "/sys/devices/system/cpu/cpu4/core_ctl/min_cpus";
     String MINLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/min_cpus";
 
     String MAXBIG = "/sys/devices/system/cpu/cpu4/core_ctl/max_cpus";
     String MAXLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus";
 
-   String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE};
+   String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE, BCH};
 
   // CPU Voltage
     String CPU_VOLTAGE = "/sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table";
@@ -107,7 +108,6 @@ public interface Constants {
     String[] CPU_VOLTAGE_ARRAY = {CPU_VOLTAGE, CPU_VDD_VOLTAGE, CPU_FAUX_VOLTAGE, CPU_OVERRIDE_VMIN};
 
     // CPU Hotplug
-    String BCH = "/sys/kernel/boeffla_config_mode/enabled";
     String HOTPLUG_MPDEC = "mpdecision";
 
     String HOTPLUG_INTELLI_PLUG = "/sys/module/intelli_plug/parameters";
@@ -258,7 +258,7 @@ public interface Constants {
     String[] HOTPLUG_AUTOSMP_ARRAY = {HOTPLUG_AUTOSMP_PARAMETERS, HOTPLUG_AUTOSMP_CONF};
 
     String[][] CPU_HOTPLUG_ARRAY = {{HOTPLUG_MPDEC}, INTELLIPLUG_ARRAY, BLU_PLUG_ARRAY, HOTPLUG_MSM_ARRAY, MAKO_HOTPLUG_ARRAY,
-            MB_HOTPLUG_ARRAY, ALUCARD_HOTPLUG_ARRAY, HOTPLUG_THUNDER_PLUG_ARRAY, HOTPLUG_ZEN_DECISION_ARRAY, HOTPLUG_AUTOSMP_ARRAY, {BCH}};
+            MB_HOTPLUG_ARRAY, ALUCARD_HOTPLUG_ARRAY, HOTPLUG_THUNDER_PLUG_ARRAY, HOTPLUG_ZEN_DECISION_ARRAY, HOTPLUG_AUTOSMP_ARRAY};
 
   // Thermal
     String THERMALD = "thermald";

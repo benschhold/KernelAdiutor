@@ -160,12 +160,12 @@ public class CoreControlFragment extends RecyclerViewFragment implements
     @Override
     public void onStop(SeekBarCardView.DSeekBarCard dSeekBarCard, int position) {
          if (dSeekBarCard == mMinLittleCard)
-            CoreControl.setMinLittle(position + 1, getActivity());
+            CoreControl.setMinLittle(position, getActivity());
          else if (dSeekBarCard == mMaxLittleCard)
-            CoreControl.setMaxLittle(position + 1, getActivity());
+            CoreControl.setMaxLittle(position, getActivity());
          else if (dSeekBarCard == mMinBigCard)
-            CoreControl.setMaxLittle(position + 1, getActivity());
+            CoreControl.setMinBig(position, getActivity());
          else if (dSeekBarCard == mMaxBigCard)
-            CoreControl.setMaxLittle(position + 1, getActivity());
+            CoreControl.setMaxBig(position, getActivity());
 }
 }
