@@ -93,7 +93,7 @@ public class CoreControlFragment extends RecyclerViewFragment implements
             mMinLittleCard = new SeekBarCardView.DSeekBarCard(list);
             mMinLittleCard.setTitle(getString(R.string.minlittle));
             mMinLittleCard.setDescription(getString(R.string.minlittle_summary));
-            mMinLittleCard.setProgress(CoreControl.getMinLittle());
+            mMinLittleCard.setProgress(CoreControl.getMinLittle() -1);
             mMinLittleCard.setOnDSeekBarCardListener(this);
 
             addView(mMinLittleCard);
@@ -108,7 +108,7 @@ public class CoreControlFragment extends RecyclerViewFragment implements
             mMaxLittleCard = new SeekBarCardView.DSeekBarCard(list);
             mMaxLittleCard.setTitle(getString(R.string.maxlittle));
             mMaxLittleCard.setDescription(getString(R.string.maxlittle_summary));
-            mMaxLittleCard.setProgress(CoreControl.getMaxLittle());
+            mMaxLittleCard.setProgress(CoreControl.getMaxLittle() -1);
             mMaxLittleCard.setOnDSeekBarCardListener(this);
 
             addView(mMaxLittleCard);
@@ -124,7 +124,7 @@ public class CoreControlFragment extends RecyclerViewFragment implements
             mMinBigCard = new SeekBarCardView.DSeekBarCard(list);
             mMinBigCard.setTitle(getString(R.string.minbig));
             mMinBigCard.setDescription(getString(R.string.minbig_summary));
-            mMinBigCard.setProgress(CoreControl.getMinBig());
+            mMinBigCard.setProgress(CoreControl.getMinBig() -1);
             mMinBigCard.setOnDSeekBarCardListener(this);
 
             addView(mMinBigCard);
@@ -139,7 +139,7 @@ public class CoreControlFragment extends RecyclerViewFragment implements
             mMaxBigCard = new SeekBarCardView.DSeekBarCard(list);
             mMaxBigCard.setTitle(getString(R.string.maxbig));
             mMaxBigCard.setDescription(getString(R.string.maxbig_summary));
-            mMaxBigCard.setProgress(CoreControl.getMaxBig());
+            mMaxBigCard.setProgress(CoreControl.getMaxBig() -1);          
             mMaxBigCard.setOnDSeekBarCardListener(this);
 
             addView(mMaxBigCard);
@@ -160,12 +160,12 @@ public class CoreControlFragment extends RecyclerViewFragment implements
     @Override
     public void onStop(SeekBarCardView.DSeekBarCard dSeekBarCard, int position) {
          if (dSeekBarCard == mMinLittleCard)
-            CoreControl.setMinLittle(position, getActivity());
+            CoreControl.setMinLittle(position + 1, getActivity());
          else if (dSeekBarCard == mMaxLittleCard)
-            CoreControl.setMaxLittle(position, getActivity());
+            CoreControl.setMaxLittle(position + 1, getActivity());
          else if (dSeekBarCard == mMinBigCard)
-            CoreControl.setMinBig(position, getActivity());
+            CoreControl.setMinBig(position + 1, getActivity());
          else if (dSeekBarCard == mMaxBigCard)
-            CoreControl.setMaxBig(position, getActivity());
+            CoreControl.setMaxBig(position + 1, getActivity());
 }
 }
