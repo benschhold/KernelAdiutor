@@ -90,11 +90,11 @@ public interface Constants {
 
   //Core Control
     String BCH = "/sys/kernel/boeffla_config_mode/enabled";
-    String MINBIG = "/sys/devices/system/cpu/cpu4/core_ctl/min_cpus";
     String MINLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/min_cpus";
+    String MINBIG = "/sys/devices/system/cpu/cpu4/core_ctl/min_cpus";
 
-    String MAXBIG = "/sys/devices/system/cpu/cpu4/core_ctl/max_cpus";
     String MAXLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus";
+    String MAXBIG = "/sys/devices/system/cpu/cpu4/core_ctl/max_cpus";
 
    String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE, BCH};
 

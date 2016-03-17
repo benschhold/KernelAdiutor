@@ -27,17 +27,30 @@ import com.grarak.kerneladiutor.utils.root.Control;
  */
 public class Battery implements Constants {
 
-    public static void setChargingRate(int value, Context context) {
-        Control.runCommand(String.valueOf(value), CUSTOM_CHARGING_RATE, Control.CommandType.GENERIC, context);
+    public static void setChargingRateAC(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CHARGE_AC, Control.CommandType.GENERIC, context);
     }
 
-    public static int getChargingRate() {
-        return Utils.stringToInt(Utils.readFile(CUSTOM_CHARGING_RATE));
+    public static int getChargingRateAC() {
+        return Utils.stringToInt(Utils.readFile(CHARGE_AC));
     }
 
-    public static boolean hasChargingRate() {
-        return Utils.existFile(CUSTOM_CHARGING_RATE);
+    public static boolean hasChargingRateAC() {
+        return Utils.existFile(CHARGE_AC);
     }
+
+    public static void setChargingRateUSB(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CHARGE_USB, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getChargingRateUSB() {
+        return Utils.stringToInt(Utils.readFile(CHARGE_USB));
+    }
+
+    public static boolean hasChargingRateUSB() {
+        return Utils.existFile(CHARGE_USB);
+    }
+
 
     public static void activateCustomChargeRate(boolean active, Context context) {
         Control.runCommand(active ? "1" : "0", CHARGE_RATE_ENABLE, Control.CommandType.GENERIC, context);
@@ -53,6 +66,9 @@ public class Battery implements Constants {
 
     public static boolean hasChargeRate() {
         return Utils.existFile(CHARGE_RATE);
+    }
+    public static int getChargeRate() {
+        return Utils.stringToInt(Utils.readFile(CHARGE_RATE));
     }
 
     public static void setBlx(int value, Context context) {

@@ -43,14 +43,16 @@ public class BatteryFragment extends RecyclerViewFragment implements
         SeekBarCardView.DSeekBarCard.OnDSeekBarCardListener {
 
     private UsageCardView.DUsageCard mBatteryLevelCard;
-    private CardViewItem.DCardView mBatteryVoltageCard, mBatteryTemperature;
+    private CardViewItem.DCardView mBatteryVoltageCard, mBatteryVoltage1Card, mBatteryTemperature;
 
     private SwitchCardView.DSwitchCard mForceFastChargeCard;
 
     private SeekBarCardView.DSeekBarCard mBlxCard;
 
+
     private SwitchCardView.DSwitchCard mCustomChargeRateEnableCard;
-    private SeekBarCardView.DSeekBarCard mChargingRateCard;
+    private SeekBarCardView.DSeekBarCard mChargingRateCardAC;
+    private SeekBarCardView.DSeekBarCard mChargingRateCardUSB;
 
     @Override
     public void init(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class BatteryFragment extends RecyclerViewFragment implements
 
         batteryLevelInit();
         batteryVoltageInit();
+        batteryVoltage1Init();
         batteryTemperatureInit();
         if (Battery.hasForceFastCharge()) forceFastChargeInit();
         if (Battery.hasBlx()) blxInit();
@@ -88,13 +91,20 @@ public class BatteryFragment extends RecyclerViewFragment implements
 
         addView(mBatteryVoltageCard);
     }
+    private void batteryVoltage1Init() {
+        mBatteryVoltage1Card = new CardViewItem.DCardView();
+        mBatteryVoltage1Card.setTitle(getString(R.string.battery_voltage_current));
 
+        addView(mBatteryVoltage1Card);
+    }
     private void batteryTemperatureInit() {
         mBatteryTemperature = new CardViewItem.DCardView();
         mBatteryTemperature.setTitle(getString(R.string.battery_temperature));
 
         addView(mBatteryTemperature);
     }
+
+
 
     private void forceFastChargeInit() {
         mForceFastChargeCard = new SwitchCardView.DSwitchCard();
@@ -121,26 +131,32 @@ public class BatteryFragment extends RecyclerViewFragment implements
 
     private void chargerateInit() {
 
-        if (Battery.hasCustomChargeRateEnable()) {
-            mCustomChargeRateEnableCard = new SwitchCardView.DSwitchCard();
-            mCustomChargeRateEnableCard.setDescription(getString(R.string.custom_charge_rate));
-            mCustomChargeRateEnableCard.setChecked(Battery.isCustomChargeRateActive());
-            mCustomChargeRateEnableCard.setOnDSwitchCardListener(this);
 
-            addView(mCustomChargeRateEnableCard);
+
+        if (Battery.hasChargingRateAC()) {
+            List<String> list = new ArrayList<>();
+            for (int i = 0; i < 151; i++) list.add((i * 10) + getString(R.string.ma));
+
+            mChargingRateCardAC = new SeekBarCardView.DSeekBarCard(list);
+            mChargingRateCardAC.setTitle(getString(R.string.charge_rate_ac));
+            mChargingRateCardAC.setDescription(getString(R.string.charge_rate_ac_summary));
+            mChargingRateCardAC.setProgress((Battery.getChargingRateAC() / 10) - 10);
+            mChargingRateCardAC.setOnDSeekBarCardListener(this);
+
+            addView(mChargingRateCardAC);
         }
 
-        if (Battery.hasChargingRate()) {
+        if (Battery.hasChargingRateUSB()) {
             List<String> list = new ArrayList<>();
-            for (int i = 10; i < 151; i++) list.add((i * 10) + getString(R.string.ma));
+            for (int i = 0; i < 151; i++) list.add((i * 10) + getString(R.string.ma));
 
-            mChargingRateCard = new SeekBarCardView.DSeekBarCard(list);
-            mChargingRateCard.setTitle(getString(R.string.charge_rate));
-            mChargingRateCard.setDescription(getString(R.string.charge_rate_summary));
-            mChargingRateCard.setProgress((Battery.getChargingRate() / 10) - 10);
-            mChargingRateCard.setOnDSeekBarCardListener(this);
+            mChargingRateCardUSB = new SeekBarCardView.DSeekBarCard(list);
+            mChargingRateCardUSB.setTitle(getString(R.string.charge_rate_usb));
+            mChargingRateCardUSB.setDescription(getString(R.string.charge_rate_usb_summary));
+            mChargingRateCardUSB.setProgress((Battery.getChargingRateUSB() / 10) - 10);
+            mChargingRateCardUSB.setOnDSeekBarCardListener(this);
 
-            addView(mChargingRateCard);
+            addView(mChargingRateCardUSB);
         }
     }
 
@@ -150,10 +166,13 @@ public class BatteryFragment extends RecyclerViewFragment implements
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
             int temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
+            int voltage1 = (Battery.getChargeRate());
 
             if (mBatteryLevelCard != null) mBatteryLevelCard.setProgress(level);
             if (mBatteryVoltageCard != null)
                 mBatteryVoltageCard.setDescription(voltage + getString(R.string.mv));
+            if (mBatteryVoltage1Card != null)
+                mBatteryVoltage1Card.setDescription(voltage1 + getString(R.string.mv));
             if (mBatteryTemperature != null) {
                 double celsius = (double) temperature / 10;
                 mBatteryTemperature.setDescription(Utils.formatCelsius(celsius) + " " + Utils.celsiusToFahrenheit(celsius));
@@ -177,8 +196,10 @@ public class BatteryFragment extends RecyclerViewFragment implements
     public void onStop(SeekBarCardView.DSeekBarCard dSeekBarCard, int position) {
         if (dSeekBarCard == mBlxCard)
             Battery.setBlx(position, getActivity());
-        else if (dSeekBarCard == mChargingRateCard)
-            Battery.setChargingRate((position * 10) + 100, getActivity());
+        else if (dSeekBarCard == mChargingRateCardAC)
+            Battery.setChargingRateAC((position * 10) ,getActivity());
+        else if (dSeekBarCard == mChargingRateCardUSB)
+            Battery.setChargingRateUSB((position * 10) ,getActivity());
     }
 
     @Override

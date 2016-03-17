@@ -485,6 +485,7 @@
 
     <!-- Battery -->
     <string name="battery_voltage">Battery Voltage</string>
+    <string name="battery_voltage_current">Current Loading Voltage</string>
     <string name="battery_level">Battery Level</string>
     <string name="battery_temperature">Battery Temperature</string>
     <string name="usb_fast_charge">USB Fast Charge</string>
@@ -492,8 +493,12 @@
     <string name="blx">Battery Life eXtender</string>
     <string name="blx_summary">Set a limit for the capacity to which the battery will be charged by passing a value between 0 and 100.</string>
     <string name="custom_charge_rate">Charge Rate</string>
-    <string name="charge_rate">Battery Charging Rate</string>
-    <string name="charge_rate_summary">Set Custom Battery Charge Rate. Caution: Exceeding 1250mA may damage your charging driver.</string>
+    <string name="charge_rate">Current Charge Rate</string>
+    <string name="charge_rate_usb">USB Charging Rate</string>
+    <string name="charge_rate_ac">AC Charging Rate</string>
+    <string name="charge_rate_summary"></string>
+    <string name="charge_rate_usb_summary">Set Custom Battery Charge Rate. Caution: Exceeding 1000mA may damage your charging driver (0=default)</string>
+    <string name="charge_rate_ac_summary">Set Custom Battery Charge Rate. Caution: Exceeding 1500mA may damage your charging driver (0=default)</string>
 
     <!-- I/O Scheduler -->
     <string name="internal_storage">Internal Storage</string>
