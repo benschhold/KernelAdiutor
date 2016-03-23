@@ -135,12 +135,12 @@ public class BatteryFragment extends RecyclerViewFragment implements
 
         if (Battery.hasChargingRateAC()) {
             List<String> list = new ArrayList<>();
-            for (int i = 0; i < 151; i++) list.add((i * 10) + getString(R.string.ma));
+            for (int i = 0; i < 221; i++) list.add((i * 10) + getString(R.string.ma));
 
             mChargingRateCardAC = new SeekBarCardView.DSeekBarCard(list);
             mChargingRateCardAC.setTitle(getString(R.string.charge_rate_ac));
             mChargingRateCardAC.setDescription(getString(R.string.charge_rate_ac_summary));
-            mChargingRateCardAC.setProgress((Battery.getChargingRateAC() / 10) - 10);
+            mChargingRateCardAC.setProgress(Battery.getChargingRateAC() / 10);
             mChargingRateCardAC.setOnDSeekBarCardListener(this);
 
             addView(mChargingRateCardAC);
@@ -153,7 +153,7 @@ public class BatteryFragment extends RecyclerViewFragment implements
             mChargingRateCardUSB = new SeekBarCardView.DSeekBarCard(list);
             mChargingRateCardUSB.setTitle(getString(R.string.charge_rate_usb));
             mChargingRateCardUSB.setDescription(getString(R.string.charge_rate_usb_summary));
-            mChargingRateCardUSB.setProgress((Battery.getChargingRateUSB() / 10) - 10);
+            mChargingRateCardUSB.setProgress(Battery.getChargingRateUSB() / 10);
             mChargingRateCardUSB.setOnDSeekBarCardListener(this);
 
             addView(mChargingRateCardUSB);

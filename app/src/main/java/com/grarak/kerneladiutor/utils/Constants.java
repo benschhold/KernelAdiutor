@@ -626,7 +626,7 @@ public interface Constants {
     String CHARGE_AC = "sys/kernel/charge_levels/charge_level_ac";
     String CHARGE_USB = "sys/kernel/charge_levels/charge_level_usb";
 
-    String[] BATTERY_ARRAY = {FORCE_FAST_CHARGE, BLX, CHARGE_RATE};
+    String[] BATTERY_ARRAY = {FORCE_FAST_CHARGE, BLX, CHARGE_RATE, CHARGE_AC, CHARGE_USB};
 
     // I/O
     String IO_INTERNAL_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";
