@@ -1350,4 +1350,55 @@ public class CPUHotplug implements Constants {
         return false;
     }
 
+   public static void activatebch(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", BCH, Control.CommandType.GENERIC, context);
+    }
+
+    public static boolean isbchActive() {
+        return Utils.readFile(BCH).equals("1");
+    }
+    public static boolean hasbch() {
+        return Utils.existFile(BCH);
+    }
+
+
+
+    public static int getmsmperformancelittle() {
+        return Utils.stringToInt(Utils.readFile(MSMPERFORMANCE).split(":")[0]);
+
+    }
+
+
+
+    public static int getmsmperformancebig() {
+        return Utils.stringToInt(Utils.readFile(MSMPERFORMANCE).split(":")[1]);
+
+    }
+
+
+
+
+    public static void setmsmperformancebig(int value, Context context) {
+     
+        Control.runCommand(getmsmperformancelittle() + ":" + value, MSMPERFORMANCE, Control.CommandType.GENERIC, context);    
+}
+
+    public static void setmsmperformancelittle(int value, Context context) {
+     
+        Control.runCommand(value + ":" + getmsmperformancebig(), MSMPERFORMANCE, Control.CommandType.GENERIC, context);    
+}
+
+
+
+    public static boolean hasmsmperformance() {
+        return Utils.existFile(MSMPERFORMANCE);
+    }
+
+
+
+
+
+
+
+
 }

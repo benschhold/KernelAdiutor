@@ -89,14 +89,13 @@ public interface Constants {
             CPU_AVAILABLE_CFS_SCHEDULERS, CPU_CURRENT_CFS_SCHEDULER, CPU_QUIET, CPU_BOOST, CPU_TOUCH_BOOST};
 
   //Core Control
-    String BCH = "/sys/kernel/boeffla_config_mode/enabled";
     String MINLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/min_cpus";
     String MINBIG = "/sys/devices/system/cpu/cpu4/core_ctl/min_cpus";
 
     String MAXLITTLE = "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus";
     String MAXBIG = "/sys/devices/system/cpu/cpu4/core_ctl/max_cpus";
 
-   String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE, BCH};
+   String[] CORECONTROL_ARRAY = {MINBIG, MINLITTLE, MAXBIG, MAXLITTLE};
 
   // CPU Voltage
     String CPU_VOLTAGE = "/sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table";
@@ -108,8 +107,9 @@ public interface Constants {
     String[] CPU_VOLTAGE_ARRAY = {CPU_VOLTAGE, CPU_VDD_VOLTAGE, CPU_FAUX_VOLTAGE, CPU_OVERRIDE_VMIN};
 
     // CPU Hotplug
+    String MSMPERFORMANCE= "/sys/module/msm_performance/parameters/max_cpus";
     String HOTPLUG_MPDEC = "mpdecision";
-
+    String BCH = "/sys/kernel/boeffla_config_mode/enabled";
     String HOTPLUG_INTELLI_PLUG = "/sys/module/intelli_plug/parameters";
     String HOTPLUG_INTELLI_PLUG_ENABLE = HOTPLUG_INTELLI_PLUG + "/intelli_plug_active";
     String HOTPLUG_INTELLI_PLUG_PROFILE = HOTPLUG_INTELLI_PLUG + "/nr_run_profile_sel";
@@ -211,7 +211,7 @@ public interface Constants {
     String MB_DELAY = "delay";
     String MB_PAUSE = "pause";
 
-    String[] MB_HOTPLUG_ARRAY = {MSM_MPDECISION_HOTPLUG, BRICKED_HOTPLUG};
+    String[] MB_HOTPLUG_ARRAY = {MSM_MPDECISION_HOTPLUG, BRICKED_HOTPLUG, BCH, (MSMPERFORMANCE)};
 
     String ALUCARD_HOTPLUG = "/sys/kernel/alucard_hotplug";
     String ALUCARD_HOTPLUG_ENABLE = ALUCARD_HOTPLUG + "/hotplug_enable";

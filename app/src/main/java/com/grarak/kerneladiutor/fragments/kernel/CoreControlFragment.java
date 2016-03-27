@@ -50,8 +50,7 @@ import java.util.Locale;
 
 
 public class CoreControlFragment extends RecyclerViewFragment implements
-        SwitchCardView.DSwitchCard.OnDSwitchCardListener, SeekBarCardView.DSeekBarCard.OnDSeekBarCardListener {
-    private SwitchCardView.DSwitchCard mbchCard;
+         SeekBarCardView.DSeekBarCard.OnDSeekBarCardListener {
     private SeekBarCardView.DSeekBarCard mMinLittleCard;
     private SeekBarCardView.DSeekBarCard mMaxLittleCard;
     private SeekBarCardView.DSeekBarCard mMinBigCard;
@@ -64,7 +63,6 @@ public class CoreControlFragment extends RecyclerViewFragment implements
         super.init(savedInstanceState);
 
 
-        if (CoreControl.hasbch()) bchInit();
         if (CoreControl.hasMinLittle()) MinLittleInit();
         if (CoreControl.hasMaxLittle()) MaxLittleInit();
         if (CoreControl.hasMinBig()) MinBigInit();
@@ -74,16 +72,7 @@ public class CoreControlFragment extends RecyclerViewFragment implements
 
 
 
-    private void bchInit() {
-        if (CoreControl.hasbch()) {
-            mbchCard = new SwitchCardView.DSwitchCard();
-             mbchCard.setTitle(getString(R.string.bch));
-             mbchCard.setDescription(getString(R.string.bch_summary));
-             mbchCard.setChecked(CoreControl.isbchActive());
-             mbchCard.setOnDSwitchCardListener(this);
 
-            addView(mbchCard);
-        }}
    
     private void MinLittleInit() {
      if (CoreControl.hasMinLittle()) {
@@ -148,11 +137,7 @@ public class CoreControlFragment extends RecyclerViewFragment implements
  }   
 
 
-    @Override
-    public void onChecked(SwitchCardView.DSwitchCard dSwitchCard, boolean checked) {
-        if (dSwitchCard == mbchCard)
-            CoreControl.activatebch(checked, getActivity());
-    }
+
     @Override
     public void onChanged(SeekBarCardView.DSeekBarCard dSeekBarCard, int position) {
     }

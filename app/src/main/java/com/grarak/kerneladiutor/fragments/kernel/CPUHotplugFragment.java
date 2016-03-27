@@ -27,7 +27,6 @@ import com.grarak.kerneladiutor.elements.cards.SwitchCardView;
 import com.grarak.kerneladiutor.fragments.RecyclerViewFragment;
 import com.grarak.kerneladiutor.utils.kernel.CPU;
 import com.grarak.kerneladiutor.utils.kernel.CPUHotplug;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +37,7 @@ import java.util.List;
 public class CPUHotplugFragment extends RecyclerViewFragment implements
         SwitchCardView.DSwitchCard.OnDSwitchCardListener,
         PopupCardView.DPopupCard.OnDPopupCardListener, SeekBarCardView.DSeekBarCard.OnDSeekBarCardListener {
-
+    private SwitchCardView.DSwitchCard mbchCard;
     private SwitchCardView.DSwitchCard mMpdecisionCard;
     private SwitchCardView.DSwitchCard mIntelliPlugCard;
     private PopupCardView.DPopupCard mIntelliPlugProfileCard;
@@ -144,10 +143,16 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
     private SeekBarCardView.DSeekBarCard mAutoSmpMinCpusCard;
     private SwitchCardView.DSwitchCard mAutoSmpScroffSingleCoreCard;
 
+    private SeekBarCardView.DSeekBarCard mmsmperformancelittleCard;
+    private SeekBarCardView.DSeekBarCard mmsmperformancebigCard;
+
+
+
     @Override
     public void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
 
+        if (CPUHotplug.hasbch()) bchInit();
         if (CPUHotplug.hasMpdecision()) mpdecisionInit();
         if (CPUHotplug.hasIntelliPlug()) intelliPlugInit();
         if (CPUHotplug.hasBluPlug()) bluPlugInit();
@@ -158,7 +163,45 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
         if (CPUHotplug.hasThunderPlug()) thunderPlugInit();
         if (CPUHotplug.hasZenDecision()) zenDecisionInit();
         if (CPUHotplug.hasAutoSmp()) autoSmpInit();
+        if (CPUHotplug.hasmsmperformance()) msmperformanceInit();
     }
+
+
+
+
+    private void msmperformanceInit() {
+           List<String> list = new ArrayList<>();
+            for (int i = -1; i < 5; i++)
+                list.add(String.valueOf(i));
+        DDivider mmsmperformanceDivider = new DDivider();
+        mmsmperformanceDivider.setText(getString(R.string.msmperformance));
+        addView(mmsmperformanceDivider);
+
+        mmsmperformancelittleCard = new SeekBarCardView.DSeekBarCard(list);
+        mmsmperformancelittleCard.setTitle(getString(R.string.msm_max_cores_little));
+        mmsmperformancelittleCard.setProgress(CPUHotplug.getmsmperformancelittle() + 1);
+        mmsmperformancelittleCard.setOnDSeekBarCardListener(this);
+
+        mmsmperformancebigCard = new SeekBarCardView.DSeekBarCard(list);
+        mmsmperformancebigCard.setTitle(getString(R.string.msm_max_cores_big));
+        mmsmperformancebigCard.setProgress(CPUHotplug.getmsmperformancebig() + 1);
+        mmsmperformancebigCard.setOnDSeekBarCardListener(this);
+
+        addView(mmsmperformancelittleCard);
+        addView(mmsmperformancebigCard);
+    }
+
+
+    private void bchInit() {
+        if (CPUHotplug.hasbch()) {
+            mbchCard = new SwitchCardView.DSwitchCard();
+             mbchCard.setTitle(getString(R.string.bch));
+             mbchCard.setDescription(getString(R.string.bch_summary));
+             mbchCard.setChecked(CPUHotplug.isbchActive());
+             mbchCard.setOnDSwitchCardListener(this);
+
+            addView(mbchCard);
+        }}
 
     private void mpdecisionInit() {
         mMpdecisionCard = new SwitchCardView.DSwitchCard();
@@ -1549,7 +1592,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
             CPUHotplug.activateAutoSmp(checked, getActivity());
         else if (dSwitchCard == mAutoSmpScroffSingleCoreCard)
             CPUHotplug.activateAutoSmpScroffSingleCoreActive(checked, getActivity());
-    }
+        else if (dSwitchCard == mbchCard)
+            CPUHotplug.activatebch(checked, getActivity());    
+}
+
+
 
     @Override
     public void onItemSelected(PopupCardView.DPopupCard dPopupCard, int position) {
@@ -1588,6 +1635,10 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
     public void onStop(SeekBarCardView.DSeekBarCard dSeekBarCard, int position) {
         if (dSeekBarCard == mIntelliPlugHysteresisCard)
             CPUHotplug.setIntelliPlugHysteresis(position, getActivity());
+        else if (dSeekBarCard == mmsmperformancelittleCard)
+            CPUHotplug.setmsmperformancelittle(position - 1, getActivity());
+        else if (dSeekBarCard == mmsmperformancebigCard)
+            CPUHotplug.setmsmperformancebig(position - 1, getActivity());
         else if (dSeekBarCard == mIntelliPlugThresholdCard)
             CPUHotplug.setIntelliPlugThresold(position, getActivity());
         else if (dSeekBarCard == mIntelliPlugCpusBoostedCard)

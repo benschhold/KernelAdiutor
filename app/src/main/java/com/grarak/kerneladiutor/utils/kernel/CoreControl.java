@@ -79,15 +79,6 @@ public class CoreControl implements Constants {
 
 
 
-    public static void activatebch(boolean active, Context context) {
-        Control.runCommand(active ? "1" : "0", BCH, Control.CommandType.GENERIC, context);
-    }
 
-    public static boolean isbchActive() {
-        return Utils.readFile(BCH).equals("1");
-    }
-    public static boolean hasbch() {
-        return Utils.existFile(BCH);
-    }
 
 }

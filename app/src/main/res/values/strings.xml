@@ -283,6 +283,9 @@
     <string name="cycle_down_summary">Cycles to wait after the last hotplug event to unplug another core.</string>
     <string name="cycle_up">Cycle Up</string>
     <string name="cycle_up_summary">Cycles to wait after the last hotplug event to plug another core.</string>
+    <string name="msm_max_cores_little">Maximum cores to be allowed online for little cluster.</string>
+    <string name="msm_max_cores_big">Maximum cores to be allowed online for big cluster.</string>
+    <string name="msmperformance">MSM Performance Hotplug</string>
 
     <!-- Thermal -->
     <string name="thermal_info">Use only one thermal driver from the following options, using more at the same time may cause unexpected behavior.</string>
