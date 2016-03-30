@@ -125,9 +125,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
     private SwitchCardView.DSwitchCard mThunderPlugEnableCard;
     private SeekBarCardView.DSeekBarCard mThunderPlugSuspendCpusCard;
     private PopupCardView.DPopupCard mThunderPlugEnduranceLevelCard;
+    private PopupCardView.DPopupCard mThunderPlugHPStyleCard;
     private SeekBarCardView.DSeekBarCard mThunderPlugSamplingRateCard;
     private SeekBarCardView.DSeekBarCard mThunderPlugLoadThresholdCard;
     private SwitchCardView.DSwitchCard mThunderPlugTouchBoostCard;
+    private SwitchCardView.DSwitchCard mThunderPlugSchedBoostCard;
 
     private SwitchCardView.DSwitchCard mZenDecisionEnableCard;
     private SeekBarCardView.DSeekBarCard mZenDecisionWakeWaitTimeCard;
@@ -1304,6 +1306,17 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
 
             views.add(mThunderPlugEnableCard);
         }
+ 
+        if (CPUHotplug.hasThunderPlughpstyle()) {
+            mThunderPlugHPStyleCard = new PopupCardView.DPopupCard(new ArrayList<>(Arrays
+                    .asList(getResources().getStringArray(R.array.thunderplug_hp_style))));
+            mThunderPlugHPStyleCard.setTitle(getString(R.string.hp_style));
+            mThunderPlugHPStyleCard.setDescription(getString(R.string.hp_style));
+            mThunderPlugHPStyleCard.setItem(CPUHotplug.getThunderPlughpstyle() - 1);
+            mThunderPlugHPStyleCard.setOnDPopupCardListener(this);
+
+            views.add(mThunderPlugHPStyleCard);
+        }
 
         if (CPUHotplug.hasThunderPlugSuspendCpus()) {
             List<String> list = new ArrayList<>();
@@ -1331,7 +1344,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
 
         if (CPUHotplug.hasThunderPlugSamplingRate()) {
             List<String> list = new ArrayList<>();
-            for (int i = 0; i < 51; i++) list.add(String.valueOf(i * 50 + 100));
+            for (int i = 0; i < 51; i++) list.add(String.valueOf(i * 50));
 
             mThunderPlugSamplingRateCard = new SeekBarCardView.DSeekBarCard(list);
             mThunderPlugSamplingRateCard.setTitle(getString(R.string.sampling_rate));
@@ -1362,6 +1375,16 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
             mThunderPlugTouchBoostCard.setOnDSwitchCardListener(this);
 
             views.add(mThunderPlugTouchBoostCard);
+        }
+
+        if (CPUHotplug.hasThunderPlugSchedBoost()) {
+            mThunderPlugSchedBoostCard = new SwitchCardView.DSwitchCard();
+            mThunderPlugSchedBoostCard.setTitle(getString(R.string.sched_boost));
+            mThunderPlugSchedBoostCard.setDescription(getString(R.string.sched_boost_summary));
+            mThunderPlugSchedBoostCard.setChecked(CPUHotplug.isThunderPlugSchedBoostActive());
+            mThunderPlugSchedBoostCard.setOnDSwitchCardListener(this);
+
+            views.add(mThunderPlugSchedBoostCard);
         }
 
         if (views.size() > 0) {
@@ -1586,6 +1609,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
             CPUHotplug.activateThunderPlug(checked, getActivity());
         else if (dSwitchCard == mThunderPlugTouchBoostCard)
             CPUHotplug.activateThunderPlugTouchBoost(checked, getActivity());
+        else if (dSwitchCard == mThunderPlugSchedBoostCard)
+            CPUHotplug.activateThunderPlugSchedBoost(checked, getActivity());
         else if (dSwitchCard == mZenDecisionEnableCard)
             CPUHotplug.activateZenDecision(checked, getActivity());
         else if (dSwitchCard == mAutoSmpEnableCard)
@@ -1618,6 +1643,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment implements
             CPUHotplug.setMBHotplugIdleFreq(CPU.getFreqs().get(position), getActivity());
         else if (dPopupCard == mThunderPlugEnduranceLevelCard)
             CPUHotplug.setThunderPlugEnduranceLevel(position, getActivity());
+        else if (dPopupCard == mThunderPlugHPStyleCard)
+            CPUHotplug.setThunderPlughpstyle(position + 1, getActivity());
         else {
             for (int i = 0; i < mMBHotplugBoostFreqsCard.length; i++)
                 if (dPopupCard == mMBHotplugBoostFreqsCard[i]) {
