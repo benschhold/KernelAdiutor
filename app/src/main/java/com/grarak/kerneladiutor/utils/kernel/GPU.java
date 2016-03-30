@@ -72,11 +72,11 @@ public class GPU implements Constants {
     }
 
     public static void activateAdrenoIdler(boolean active, Context context) {
-        Control.runCommand(active ? "Y" : "N", ADRENO_IDLER_ACTIVATE, Control.CommandType.GENERIC, context);
+        Control.runCommand(active ? "1" : "0", ADRENO_IDLER_ACTIVATE, Control.CommandType.GENERIC, context);
     }
 
     public static boolean isAdrenoIdlerActive() {
-        return Utils.readFile(ADRENO_IDLER_ACTIVATE).equals("Y");
+        return Utils.readFile(ADRENO_IDLER_ACTIVATE).equals("1");
     }
 
     public static boolean hasAdrenoIdler() {
