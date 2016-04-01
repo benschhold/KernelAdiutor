@@ -628,8 +628,9 @@ public interface Constants {
     String CUSTOM_CHARGING_RATE = CHARGE_RATE + "/custom_current";
     String CHARGE_AC = "sys/kernel/charge_levels/charge_level_ac";
     String CHARGE_USB = "sys/kernel/charge_levels/charge_level_usb";
+    String LOW_POWER_VALUE= "sys/module/battery_current_limit/parameters/low_battery_value";	
 
-    String[] BATTERY_ARRAY = {FORCE_FAST_CHARGE, BLX, CHARGE_RATE, CHARGE_AC, CHARGE_USB};
+    String[] BATTERY_ARRAY = {FORCE_FAST_CHARGE, BLX, CHARGE_RATE, CHARGE_AC, CHARGE_USB, LOW_POWER_VALUE};
 
     // I/O
     String IO_INTERNAL_SCHEDULER = "/sys/block/mmcblk0/queue/scheduler";

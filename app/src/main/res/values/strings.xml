@@ -507,6 +507,9 @@
     <string name="charge_rate_summary"></string>
     <string name="charge_rate_usb_summary">Set Custom Battery Charge Rate. Caution: Exceeding 1000mA may damage your charging driver (0=default)</string>
     <string name="charge_rate_ac_summary">Set Custom Battery Charge Rate. Caution: Exceeding 1500mA may damage your charging driver (0=default)</string>
+    <string name="lowpowervalue">Low Power Value</string>
+    <string name="lowpowervalue_summary">Set the Battery Level in % where big cores will shutdown.</string>
+
 
     <!-- I/O Scheduler -->
     <string name="internal_storage">Internal Storage</string>
