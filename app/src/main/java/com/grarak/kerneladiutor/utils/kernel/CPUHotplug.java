@@ -1503,6 +1503,107 @@ public class CPUHotplug implements Constants {
         return TYPE != null;
     }
 
+    public static void setClusterplugHotplugCpuUpRate(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CLUSTERPLUG_HOTPLUG_CPU_UP_RATE, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getClusterplugHotplugCpuUpRate() {
+        return Utils.stringToInt(Utils.readFile(CLUSTERPLUG_HOTPLUG_CPU_UP_RATE));
+    }
+
+    public static boolean hasClusterplugHotplugCpuUpRate() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_CPU_UP_RATE);
+    }
+
+    public static void setClusterplugHotplugCpuDownRate(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CLUSTERPLUG_HOTPLUG_CPU_DOWN_RATE, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getClusterplugHotplugCpuDownRate() {
+        return Utils.stringToInt(Utils.readFile(CLUSTERPLUG_HOTPLUG_CPU_DOWN_RATE));
+    }
+
+    public static boolean hasClusterplugHotplugCpuDownRate() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_CPU_DOWN_RATE);
+    }
+
+    public static void setClusterplugHotplugLowPowerMode(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CLUSTERPLUG_HOTPLUG_LOWPOWER, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getClusterplugHotplugLowPowerMode() {
+        return Utils.stringToInt(Utils.readFile(CLUSTERPLUG_HOTPLUG_LOWPOWER));
+    }
+
+    public static boolean hasClusterplugHotplugLowPowerMode() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_LOWPOWER);
+    }
+
+    public static void activateClusterplugHotplugLowPowerMode(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", CLUSTERPLUG_HOTPLUG_LOWPOWER, Control.CommandType.GENERIC, context);
+    }
+
+    public static boolean isClusterplugHotplugLowPowerModeActive() {
+        return Utils.readFile(CLUSTERPLUG_HOTPLUG_LOWPOWER).equals("1");
+    }
+
+
+    public static void setClusterplugHotplugVoteDown(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CLUSTERPLUG_HOTPLUG_VOTE_DOWN, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getClusterplugHotplugVoteDown() {
+        return Utils.stringToInt(Utils.readFile(CLUSTERPLUG_HOTPLUG_VOTE_DOWN));
+    }
+
+    public static boolean hasClusterplugHotplugVoteDown() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_VOTE_DOWN);
+    }
+
+    public static void setClusterplugHotplugVoteUp(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CLUSTERPLUG_HOTPLUG_VOTE_UP, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getClusterplugHotplugVoteUp() {
+        return Utils.stringToInt(Utils.readFile(CLUSTERPLUG_HOTPLUG_VOTE_UP));
+    }
+
+    public static boolean hasClusterplugHotplugVoteUp() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_VOTE_UP);
+    }
+
+
+    public static void setClusterplugHotplugSamplingRate(int value, Context context) {
+        Control.runCommand(String.valueOf(value), CLUSTERPLUG_HOTPLUG_SAMPLING_RATE, Control.CommandType.GENERIC, context);
+    }
+
+    public static int getClusterplugHotplugSamplingRate() {
+        return Utils.stringToInt(Utils.readFile(CLUSTERPLUG_HOTPLUG_SAMPLING_RATE));
+    }
+
+    public static boolean hasClusterplugHotplugSamplingRate() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_SAMPLING_RATE);
+    }
+
+
+    public static void activateClusterplugHotplug(boolean active, Context context) {
+        Control.runCommand(active ? "1" : "0", CLUSTERPLUG_HOTPLUG_ENABLE, Control.CommandType.GENERIC, context);
+        if (active) togglehotplugs("ClusterplugHotplug", context);
+    }
+
+    public static boolean isClusterplugHotplugActive() {
+        return Utils.readFile(CLUSTERPLUG_HOTPLUG_ENABLE).equals("1");
+    }
+
+    public static boolean hasClusterplugHotplugEnable() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG_ENABLE);
+    }
+
+    public static boolean hasClusterplugHotplug() {
+        return Utils.existFile(CLUSTERPLUG_HOTPLUG);
+    }
+
+
     public static void activateMpdecision(boolean active, Context context) {
         if (active) {
             Control.startService(HOTPLUG_MPDEC, context);
@@ -1549,6 +1650,7 @@ public class CPUHotplug implements Constants {
         if (CPUHotplug.isAlucardHotplugActive() && hasAlucardHotplugEnable() && !activehotplug.equals("AlucardHotplug")) Control.runCommand("0", ALUCARD_HOTPLUG_ENABLE, Control.CommandType.GENERIC, context);
         if (CPUHotplug.isMakoHotplugActive() && hasMakoHotplugEnable() && !activehotplug.equals("MakoHotPlug")) Control.runCommand("0", MAKO_HOTPLUG_ENABLED, Control.CommandType.GENERIC, context);
         if (CPUHotplug.isBluPlugActive() && CPUHotplug.hasBluPlugEnable() && !activehotplug.equals("BluPlug")) Control.runCommand("0", HOTPLUG_BLU_PLUG_ENABLE, Control.CommandType.GENERIC, context);
+        if (CPUHotplug.isClusterplugHotplugActive() && hasClusterplugHotplugEnable() && !activehotplug.equals("ClusterplugHotplug")) Control.runCommand("0", CLUSTERPLUG_HOTPLUG_ENABLE, Control.CommandType.GENERIC, context);
         if (CPUHotplug.isIntelliPlugActive() && hasIntelliPlugEnable() && !activehotplug.equals("IntelliPlug")) {
             if (Utils.existFile(HOTPLUG_INTELLI_PLUG_ENABLE)) Control.runCommand("0", HOTPLUG_INTELLI_PLUG_ENABLE, Control.CommandType.GENERIC, context);
             if (Utils.existFile(HOTPLUG_INTELLI_PLUG_5_ENABLE)) Control.runCommand("0", HOTPLUG_INTELLI_PLUG_5_ENABLE, Control.CommandType.GENERIC, context);

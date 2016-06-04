@@ -305,6 +305,13 @@
     <string name="pause_summary">If something else plugs in the CPU, fall asleep for this amount of time.</string>
     <string name="alucard_hotplug">Alucard Hotplug</string>
     <string name="alucard_hotplug_summary">An in-kernel replacement for Qualcomm\'s MPDecision. Developed by Alucard.</string>
+    <string name="clusterplug_hotplug">Clusterplug Hotplug</string>
+    <string name="clusterplug_hotplug_summary">Cluster-plug is a simple cluster-based hotplug implementation for homogeneous
+ARM big.LITTLE systems.</string>
+    <string name="low_power_mode">Low Power Mode</string>
+    <string name="low_power_mode_summary">Low Power Mode</string>
+    <string name="Vote_down_rate">vote down rate</string>
+    <string name="Vote_up_rate">vote up rate</string>
     <string name="sampling_rate">Sampling Rate</string>
     <string name="cpu_down_rate">CPU Down Rate</string>
     <string name="cpu_up_rate">CPU Up Rate</string>
